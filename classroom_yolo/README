@@ -1,0 +1,14 @@
+To run the BA Server code 
+run : python main.py <classroom_no>
+
+Note : If you want to run the classrooms without zonal occupancy, change "zonal" in config_zones.cfg to false.
+
+
+
+If you are trying to run using ssh, make sure that you have established -X connection
+
+
+Unit Testing is possible in runyolo.py and facedetection.py
+For unit testing, open runyolo.py and uncomment the last line. Check the rtsp link before running the python script
+
+
