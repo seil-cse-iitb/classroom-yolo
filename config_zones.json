@@ -1,0 +1,27 @@
+{
+	"C201R":
+			{
+				"zonal": true,
+				"no_of_zones": 2,
+				"cameras":{
+					"1":[0,2],
+					"2":[1]
+				}
+			},
+	"C205R": {
+				"zonal": false,
+				"no_of_zones": 1
+			},
+	"C301R":{
+				"zonal": false,
+				"no_of_zones": 2
+			},
+	"C305R":{
+				"zonal": false,
+				"no_of_zones": 1
+			},
+	"C304R": {
+				"zonal": false,
+				"no_of_zones": 1
+			}
+}

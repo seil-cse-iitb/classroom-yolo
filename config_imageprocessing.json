@@ -1,0 +1,18 @@
+{
+	"T_standby":2,
+	"T_Check" : 20,
+	"T_Restart" : 7,
+	"checkafterHND":5,
+	"zonalcheck":4,
+	"frame width" : 500,
+	"Threshold Area": 150,
+	"motion with skin": false,
+	"delta_thresh": 5,
+	"resolution": [640, 480],
+	"fps": 16,
+	"show_result":false,
+	"path":"/home/seil/BA/debug_facedetection",
+	"no_of_HNDS": 6,
+    "img_src":"/home/malvika/darknet_classroom/darknet/data/find_hp.jpg",
+	"img_result":"/home/malvika/darknet_classroom/darknet/predictions.png"
+}

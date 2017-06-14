@@ -1,0 +1,42 @@
+{
+	"db_ip": "10.129.23.161",
+	"username": "reader",
+	"password": "datapool",
+	"database": "datapool",
+	
+	"201": {
+			"data_id" : "C201R",
+			"port_no" : 4010,
+			"camera_urls": ["rtsp://10.129.23.230:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+							"rtsp://10.129.23.231:1024/ISAPI/streaming/channels/101?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+							"rtsp://10.129.23.232:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw="]
+			},
+			
+	"205": {
+			"data_id" : "C205R",
+			"port_no" : 4011,
+			"camera_urls": ["rtsp://10.129.23.233:1024/ISAPI/streaming/channels/101?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+							"rtsp://10.129.23.234:554/ISAPI/streaming/channels/101?auth=YWRtaW46dGhlY2FtQHNlaWw="]
+			},
+			
+	"301": {
+			"data_id" : "C301R",
+			"port_no" : 4012,
+			"camera_urls": ["rtsp://10.129.23.235:1024/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+							"rtsp://10.129.23.236:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+							"rtsp://10.129.23.237:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw="]
+			},
+			
+	"305": {
+			"data_id" : "C305R",
+			"port_no" : 4013,
+			"camera_urls": ["rtsp://10.129.23.238:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+							"rtsp://10.129.23.239:1024/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw="]
+			},
+			
+	"304": {
+			"data_id" : "C304R",
+			"port_no" : 4014,
+			"camera_urls": "rtsp://10.129.23.233:1024/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw="
+			}
+}	
