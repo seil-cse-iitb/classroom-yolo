@@ -1,5 +1,5 @@
 {
-	"db_ip": "10.129.23.161",
+	"db_ip": "10.129.23.41",
 	"username": "reader",
 	"password": "datapool",
 	"database": "datapool",
@@ -30,7 +30,11 @@
 	"305": {
 			"data_id" : "C305R",
 			"port_no" : 4013,
-			"camera_urls": ["rtsp://10.129.23.238:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+
+			"camera_urls": ["rtsp://10.129.23.230:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+							"rtsp://10.129.23.231:1024/ISAPI/streaming/channels/101?auth=YWRtaW46dGhlY2FtQHNlaWw=",
+							"rtsp://10.129.23.232:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw="],
+			"camera_urls_real": ["rtsp://10.129.23.238:554/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw=",
 							"rtsp://10.129.23.239:1024/ISAPI/streaming/channels/102?auth=YWRtaW46dGhlY2FtQHNlaWw="]
 			},
 			

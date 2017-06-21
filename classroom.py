@@ -3,13 +3,18 @@ This code is the server code for the SCC.
 It receives PIR trigger messages, triggers the camera,
 processes the camera feed and sends the output (HD/HND) vis Ethernet.
 '''
+import logging
 import json
 import sys
 from helper_functions import connect_to_database
 from workerprocess_class import WorkerProcess
 from threading import Lock
 from  hd_variables import variables_hd
+
 def main():
+
+    logging.basicConfig(filename='classroomserver.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+    logging.info('Started the Server Code')
     print "Starting...."
 
     variables_hd.mutex = Lock()
@@ -33,6 +38,7 @@ def main():
     pool = []
 
     #help:def __init__(self, data_id, cam_urls, port, pr1_ip, pr1_port, pr2_ip ,pr2_port):
+    logging.info('Starting WorkerProcess')
     pool.append(WorkerProcess(roomno,data_id, port_no, cam_urls, pr1_ip, pr1_port, pr2_ip, pr2_port))
 
     # Start all process

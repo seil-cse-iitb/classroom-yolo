@@ -6,9 +6,11 @@ The message to/from the proxy forwarder are sent/recieved
 import sys
 import socket
 import json
+import logging
 from helper_functions import connect_to_database
 from datetime import datetime
 import time
+from hd_variables import *
 
 #ip and the port address to where the message has to be sent is pr2_ip, pr2_port
 #pr1_ip, pr1_port are not used
@@ -24,8 +26,27 @@ ip_own = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname()
 
 
 def createSocket(port):
-    print "I'm " + str(ip_own)+"  on "+str(port)
+    print "I'm " + str(ip_own)+"  on "+str(port)+" will be sending messages to " +str(pr2_ip)+" on "+str(pr2_port)
     sock_recv.bind((ip_own ,port))
+
+def send_HD(data_id,cycle,zone_no):
+
+    logging.info("Inside send_HD,"+'cycle:'+str(cycle.is_set)+'zone_no:'+str(zone_no))
+    if cycle.is_set():
+
+        reply_msg = "#" + data_id + "I" + str(zone_no+1) + ","
+        print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Cycle status " , cycle.is_set()
+        reply_msg += "HD;"
+        msg_send(reply_msg)
+        print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Zone " + str(zone_no+1) + ":" + str(variables_hd.hd_zone[zone_no])
+
+def send_HND(data_id,zone_no):
+    logging.info("Inside send_HD,"+'zone_no:'+str(zone_no))
+    reply_msg = "#" + data_id + "I" + str(zone_no+1) + ","
+    reply_msg += "HND;"
+    msg_send(reply_msg)
+    print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Zone " + str(zone_no+1) + ":" + str(variables_hd.hd_zone[zone_no])
+    time.sleep(1)
 
 
 def msg_recived():

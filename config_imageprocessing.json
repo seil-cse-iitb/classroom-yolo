@@ -10,9 +10,9 @@
 	"delta_thresh": 5,
 	"resolution": [640, 480],
 	"fps": 16,
-	"show_result":false,
+	"show_video":false,
 	"path":"/home/seil/BA/debug_facedetection",
-	"no_of_HNDS": 6,
-    "img_src":"/home/malvika/darknet_classroom/darknet/data/find_hp.jpg",
-	"img_result":"/home/malvika/darknet_classroom/darknet/predictions.png"
+	"no_of_HNDS": 0,
+    "img_src":"/home/stark/BA/yolo_dev/darknet_classroom/darknet/data/find_hp.jpg",
+	"img_result":"/home/stark/BA/yolo_dev/darknet_classroom/darknet/predictions.png"
 }

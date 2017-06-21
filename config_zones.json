@@ -17,8 +17,10 @@
 				"no_of_zones": 2
 			},
 	"C305R":{
-				"zonal": false,
-				"no_of_zones": 1
+				"zonal": true,
+				"no_of_zones": 2,
+				"cameras":{
+					"0":[0,1],"1":[2]}
 			},
 	"C304R": {
 				"zonal": false,

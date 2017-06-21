@@ -6,6 +6,7 @@ import threading
 from hd_variables import variables_hd
 from datetime import datetime
 import subprocess
+import os
 
 def yolo_unittest(cam_url):
     HD=False
@@ -37,10 +38,14 @@ def yolo_unittest(cam_url):
     		print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Waiting"
     		continue
 
-    	cv2.imwrite("/home/malvika/darknet_classroom/darknet/data/find_hp.jpg",frame)
-    	hp=subprocess.call(["sh", "/home/malvika/darknet_classroom/darknet/yolounit.sh"])
 
-    	if hp==1:
+    	cv2.imwrite("/home/stark/BA/yolo_dev/darknet_classroom/darknet/data/find_hp.jpg",frame)
+	FNULL = open(os.devnull, 'w')
+    	hp=subprocess.call(["sh", "/home/stark/BA/yolo_dev/darknet_classroom/darknet/yolounit.sh"],stdout=FNULL, stderr=subprocess.STDOUT)
+	print "Value of hp:" + str(hp)
+	
+    	if hp>=1:
+		#print "Value of hp:" + str(hp)
     		HD = True
     		camera.release()
     		#cv2.destroyAllWindows()

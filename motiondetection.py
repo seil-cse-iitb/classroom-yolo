@@ -4,27 +4,33 @@ import numpy as np
 import cv2
 import json
 import threading
+import logging
 from hd_variables import variables_hd
 from datetime import datetime
-from workerprocess_class import *
+from networkLayer import send_HD
+
 
 class motiondetection(threading.Thread):
 
-	def __init__(self,roomno,cam_url,threadid):
+	def __init__(self,cycle,data_id,cam_url,threadid):
 		threading.Thread.__init__(self)
 		self.threadid = threadid
 		self.cam_url = cam_url
-		self.roomno = roomno
+		self.data_id = data_id
+		self.cycle = cycle
 
 	def run(self):
-		print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Starting Motion Detection for Camera " + str(self.threadid+1)
+		#print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Starting Motion Detection for Camera " + str(self.threadid+1)
 		conf = json.load(open('config_imageprocessing.json'))
 		conf_zones = json.load(open('config_zones.json'))
 
-		zone_info = conf_zones[self.roomno]["cameras"]
+		zone_info = conf_zones[self.data_id]["cameras"]
 		for keys in zone_info.keys():
 			if str(self.threadid) in keys :
+				zone_no = 0
 				zone_no=keys
+
+		zone_no = int(zone_no)
 
 		HD_Timer =0
 		ThresholdArea = conf["Threshold Area"]
@@ -53,6 +59,8 @@ class motiondetection(threading.Thread):
 		while True:
 
 			if variables_hd.decision[zone_no] == True:
+				print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+ "QUITTING MOTION" + "(Camera " + str(self.threadid) + ")"
+				logging.info('Quitting Motion Detection. Another Camera and/or Algorithm gives HD for Zone ' + str(self.zone_no))
 				return
 
 			(grabbed, frame) = camera.read()
@@ -106,25 +114,21 @@ class motiondetection(threading.Thread):
 					#print HD_Timer
 					camera.release()
 					#cv2.destroyAllWindows()
+					variables_hd.mutex.acquire()
+					logging.info('Mutex Acquired, Camera:' + str(self.threadid +1))
+					logging.info('Motion HD, Camera:' + str(self.threadid +1))
+					variables_hd.decision[zone_no] = True;
+					send_HD(self.data_id,self.cycle,zone_no)
+					logging.info('Motion HD, Camera:' + str(self.threadid +1))
+					print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+ "Camera " + str(self.threadid) + ":Motion HD"
+					variables_hd.mutex.release()
+					logging.info('Mutex Released, Camera:' + str(self.threadid +1))
+					variables_hd.hd_zone[zone_no] = True
+
 					print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Camera "+ str(self.threadid+1) + ": max_contour_size:" +  str(max_contour_area) + ", no_of_contours:" + \
 					str(no_of_contours) +  ", HD Timer:" + str(HD_Timer) + ", MOTION:" + str(variables_hd.hd_zone[self.threadid])
-
-					variables_hd.mutex.acquire()
-					variables_hd.Decision[zone_no] = True;
-					send_HD(zone_no)
-					variables_hd.mutex.release()
-					variables_hd.hd_zone[zone_no] = True
 					return
 
-			#else:
-				#HD_Timer = 0
-
-			if HD_Timer>25:
-				variables_hd.mutex.acquire()
-				variables_hd.Decision[zone_no] = True;
-				send_HD(zone_no)
-				variables_hd.mutex.release()
-				variables_hd.hd_zone[self.threadid] = True
 				#filename = "/home/stark/BA/Malvika/Presence/" + str(time.strftime("%H %M %S")) + "_" +  str(int(max_contour_area)) + ".jpg"
 				#print filename
 				#cv2.imwrite(filename,frame)
@@ -138,18 +142,19 @@ class motiondetection(threading.Thread):
 
 		camera.release()
 		#cv2.destroyAllWindows()
-		print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Camera "+ str(self.threadid+1) + ": max_contour_size:" +  str(max_contour_area) + ", no_of_contours:" + str(no_of_contours) + \
-		", HD Timer:" + str(HD_Timer) + ", MOTION:" + str(variables_hd.hd_zone[self.threadid])
+
 
 		variables_hd.hd_zone[self.threadid] = False
+		print datetime.now().strftime('[%d-%b-%y %H:%M:%S]')+" Camera "+ str(self.threadid+1) + ": max_contour_size:" +  str(max_contour_area) + ", no_of_contours:" + str(no_of_contours) + \
+		", HD Timer:" + str(HD_Timer) + ", MOTION:" + str(variables_hd.hd_zone[self.threadid])
 		return
 
 
 def skin_detection(image, x,y,w,h):
 	# Constants for finding range of skin color in YCrCb
 	min_YCrCb = np.array([0,133,77],np.uint8)
-	max_YCrCb = np.array([255,173,127],np.uint8)
 
+	max_YCrCb = np.array([255,173,127],np.uint8)
 	# Convert image to YCrCb
 	imageYCrCb = cv2.cvtColor(image,cv2.COLOR_BGR2YCR_CB)
 
