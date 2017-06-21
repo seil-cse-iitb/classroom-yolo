@@ -1,0 +1,17 @@
+{
+	"T_standby":2,
+	"T_Check" : 20,
+	"T_Restart" : 7,
+	"checkafterHND":5,
+	"zonalcheck":4,
+	"frame width" : 500,
+	"Threshold Area": 150,
+	"motion with skin": false,
+	"delta_thresh": 5,
+	"resolution": [640, 480],
+	"fps": 16,
+	"cascade_classifier": "/home/seil/opencv/opencv-2.4.11/data/haarcascades/haarcascade_profileface.xml",
+	"show_result":false,
+	"path":"/home/seil/BA/debug_facedetection",
+	"no_of_HNDS": 1
+}
